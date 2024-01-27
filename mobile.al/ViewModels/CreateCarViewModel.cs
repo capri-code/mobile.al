@@ -10,11 +10,12 @@ namespace mobile.al.ViewModels
         public float Price { get; set; }
 		public long Mileage { get; set; }
 		public IFormFile Image { get; set; }
-        public DateOnly? DateProduced { get; set; }
-        public DateOnly? DateAdded { get; set; }
+        //public DateTime CreatedAt { get; set; }
+        //public DateTime DateProduced { get; set; }
+        //public DateTime DateAdded { get; set; }
         public bool? Accidented { get; set; }
         public string Model { get; set; }
-        public string HorsePower { get; set; }
+        public int HorsePower { get; set; }
 		public GearBoxCategory GearBoxCategory { get; set; }
 		public FuelTypeCategory FuelTypeCategory { get; set; }
         public string Color { get; set; }

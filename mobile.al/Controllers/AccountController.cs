@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using mobile.al.Data;
-using mobile.al.Interfaces;
+using mobile.al.Data.Static;
 using mobile.al.Models;
 using mobile.al.ViewModels;
 using System;

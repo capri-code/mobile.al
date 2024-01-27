@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using mobile.al.Models;
 using mobile.al.Data.Enum;
+using mobile.al.Data.Static;
 
 namespace mobile.al.Data
 {
-	public class Seed
+    public class Seed
 	{
 		public static void SeedData(IApplicationBuilder applicationBuilder)
 		{
@@ -25,11 +26,13 @@ namespace mobile.al.Data
 							Mileage = 100000,
                             Title = "Car 1",
 							Image = "https://www.mercedes-benz.com.hk/content/hong-kong/en/passengercars/_jcr_content/root/responsivegrid/simple_stage_1564354.component.damq1.3395845990318.jpg/mercedes-benz-cle-coupe-c236-stage-3840x3840-06-2023.jpg",
-							Accidented = false,
+                            //DateProduced = DateTime.Now,
+                            //DateAdded = DateTime.Now,
+                            Accidented = false,
 							Model = "E-Class 220",
 							HorsePower = 360,
-							FuelTypeCategory = FuelTypeCategory.Diesel,
-							GearBoxCategory = GearBoxCategory.Automatic,
+                            GearBoxCategory = GearBoxCategory.Automatic,
+                            FuelTypeCategory = FuelTypeCategory.Diesel,
 							CarCategory = CarCategory.MercedesBenz,
 							Color = "Grey",
 							Extras = "Full-Panoramic",
@@ -47,7 +50,9 @@ namespace mobile.al.Data
                             Mileage = 100000,
                             Title = "Car 1",
                             Image = "https://www.mercedes-benz.com.hk/content/hong-kong/en/passengercars/_jcr_content/root/responsivegrid/simple_stage_1564354.component.damq1.3395845990318.jpg/mercedes-benz-cle-coupe-c236-stage-3840x3840-06-2023.jpg",
-                            Accidented = false,
+       //                     DateProduced = DateTime.Now,
+							//DateAdded = DateTime.Now,
+							Accidented = false,
                             Model = "E-Class 220",
                             HorsePower = 360,
                             FuelTypeCategory = FuelTypeCategory.Diesel,
@@ -69,6 +74,8 @@ namespace mobile.al.Data
                             Mileage = 100000,
                             Title = "Car 1",
                             Image = "https://www.mercedes-benz.com.hk/content/hong-kong/en/passengercars/_jcr_content/root/responsivegrid/simple_stage_1564354.component.damq1.3395845990318.jpg/mercedes-benz-cle-coupe-c236-stage-3840x3840-06-2023.jpg",
+                            //DateProduced = DateTime.Now,
+                            //DateAdded = DateTime.Now,
                             Accidented = false,
                             Model = "E-Class 220",
                             HorsePower = 360,
@@ -83,29 +90,7 @@ namespace mobile.al.Data
                                 City = "Tirane",
                                 State = "Albania"
                             }
-                         },
-                        new Car()
-                        {
-                            Description = "Mercedes-Benz E-Class ne gjendje shume te mire",
-                            Price = 100000,
-                            Mileage = 100000,
-                            Title = "Car 1",
-                            Image = "https://www.mercedes-benz.com.hk/content/hong-kong/en/passengercars/_jcr_content/root/responsivegrid/simple_stage_1564354.component.damq1.3395845990318.jpg/mercedes-benz-cle-coupe-c236-stage-3840x3840-06-2023.jpg",
-                            Accidented = false,
-                            Model = "E-Class 220",
-                            HorsePower = 360,
-                            FuelTypeCategory = FuelTypeCategory.Diesel,
-                            GearBoxCategory = GearBoxCategory.Automatic,
-                            CarCategory = CarCategory.MercedesBenz,
-                            Color = "Grey",
-                            Extras = "Full-Panoramic",
-                            Address = new Address()
-                            {
-                                Street = "Rruga Muhamet Gjollesha",
-                                City = "Tirane",
-                                State = "Albania"
-                            }
-                         },
+                         }
                     });
 					context.SaveChanges();
 				}

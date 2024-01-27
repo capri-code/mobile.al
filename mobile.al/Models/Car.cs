@@ -12,10 +12,15 @@ namespace mobile.al.Models
         public string Description { get; set; }
         public float Price { get; set; }
         public long Mileage { get; set; }
-        public string Title { get; set; } //Title
+        public string Title { get; set; }
         public string Image { get; set; }
-        //public DateOnly? DateProduced { get; set; }
-        //public DateOnly? DateAdded { get; set; }
+        //public bool IsAvailable { get; set; }
+        //public bool IsDeleted { get; set; }
+        //public DateTime CreatedAt { get; set; }
+        //public DateTime? UpdatedAt { get; set; }
+        //public bool IsAvailable { get; set; }
+        //public DateTime DateProduced { get; set; }
+        //public DateTime DateAdded { get; set; }
         public bool? Accidented { get; set; }
         public string Model { get; set; }
         public int HorsePower { get; set; }

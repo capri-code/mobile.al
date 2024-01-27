@@ -1,4 +1,4 @@
-﻿namespace mobile.al.Data
+﻿namespace mobile.al.Data.Static
 {
     public static class UserRoles
     {

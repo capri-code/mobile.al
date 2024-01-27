@@ -42,17 +42,21 @@ namespace mobile.al.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateCarViewModel carVM)
         {
-            if (ModelState.IsValid)
+            if(ModelState.IsValid)
             {
                 var result = await _photoService.AddPhotoAsync(carVM.Image);
 
                 var car = new Car
                 {
+                    CarCategory = carVM.CarCategory,
                     Title = carVM.Title,
                     Description = carVM.Description,
                     Price = carVM.Price,
                     Mileage = carVM.Mileage,
                     Image = result.Url.ToString(),
+                    FuelTypeCategory = carVM.FuelTypeCategory,
+                    GearBoxCategory = carVM.GearBoxCategory,
+                    //DateProduced = carVM.DateProduced,
                     Accidented = carVM.Accidented,
                     Model = carVM.Model,
                     HorsePower = carVM.HorsePower,
@@ -83,19 +87,21 @@ namespace mobile.al.Controllers
             if (car == null) return View("Error");
             var carVM = new EditCarViewModel
             {
+                CarCategory = car.CarCategory,
                 Title = car.Title,
                 Description = car.Description,
-                AddressId = car.AddressId,
-                Address = car.Address,
+                Price = car.Price,
+                Mileage = car.Mileage,
                 URL = car.Image,
-				Accidented = car.Accidented,
-				Model = car.Model,
-				HorsePower = car.HorsePower,
-				Color = car.Color,
-				Extras = car.Extras,
-				FuelTypeCategory = car.FuelTypeCategory,
+                //DateAdded = car.DateAdded,
+                FuelTypeCategory = car.FuelTypeCategory,
                 GearBoxCategory = car.GearBoxCategory,
-                CarCategory = car.CarCategory,
+                //DateProduced = car.DateProduced,
+                Accidented = car.Accidented,
+                Model = car.Model,
+                HorsePower = car.HorsePower,
+                Color = car.Color,
+                Extras = car.Extras,
             };
             return View(carVM);
         }
@@ -126,12 +132,21 @@ namespace mobile.al.Controllers
 
                 var car = new Car
                 {
-                    Id = id,
+                    CarCategory = carVM.CarCategory,
                     Title = carVM.Title,
                     Description = carVM.Description,
                     Price = carVM.Price,
                     Mileage = carVM.Mileage,
                     Image = photoResult.Url.ToString(),
+                    //DateAdded = carVM.DateAdded,
+                    FuelTypeCategory = carVM.FuelTypeCategory,
+                    GearBoxCategory = carVM.GearBoxCategory,
+                    //DateProduced = carVM.DateProduced,
+                    Accidented = carVM.Accidented,
+                    Model = carVM.Model,
+                    HorsePower = carVM.HorsePower,
+                    Color = carVM.Color,
+                    Extras = carVM.Extras,
                     AddressId = carVM.AddressId,
                     Address = carVM.Address,
                 };
