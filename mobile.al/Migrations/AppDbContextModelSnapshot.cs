@@ -273,13 +273,13 @@ namespace mobile.al.Migrations
                     b.Property<bool?>("Accidented")
                         .HasColumnType("bit");
 
-                    b.Property<int>("AddressId")
+                    b.Property<int?>("AddressId")
                         .HasColumnType("int");
 
                     b.Property<string>("AppUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("CarCategory")
+                    b.Property<int>("Category")
                         .HasColumnType("int");
 
                     b.Property<string>("Color")
@@ -287,12 +287,13 @@ namespace mobile.al.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Extras")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Emission")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Extras")
+                        .HasColumnType("int");
 
                     b.Property<int>("FuelTypeCategory")
                         .HasColumnType("int");
@@ -307,6 +308,12 @@ namespace mobile.al.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Interior")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Make")
+                        .HasColumnType("int");
+
                     b.Property<long>("Mileage")
                         .HasColumnType("bigint");
 
@@ -317,9 +324,8 @@ namespace mobile.al.Migrations
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Seller")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -394,17 +400,15 @@ namespace mobile.al.Migrations
                 {
                     b.HasOne("mobile.al.Models.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AddressId");
 
-                    b.HasOne("mobile.al.Models.AppUser", "ApplicationUser")
+                    b.HasOne("mobile.al.Models.AppUser", "AppUser")
                         .WithMany("Cars")
                         .HasForeignKey("AppUserId");
 
                     b.Navigation("Address");
 
-                    b.Navigation("ApplicationUser");
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("mobile.al.Models.AppUser", b =>

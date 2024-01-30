@@ -18,7 +18,7 @@ namespace mobile.al.Repository
         public async Task<List<Car>> GetAllUserCars()
         {
             var curUser = _httpContextAccesor.HttpContext?.User.GetUserId();
-            var userCars = _context.Cars.Where(r => r.ApplicationUser.Id == curUser);
+            var userCars = _context.Cars.Where(r => r.AppUser.Id == curUser);
             return userCars.ToList();
         }
 

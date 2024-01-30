@@ -1,6 +1,6 @@
 ﻿namespace mobile.al.Data.Enum
 {
-    public enum CarCategory
+    public enum Make
     {
 		AlfaRomeo,
         AstonMartin,

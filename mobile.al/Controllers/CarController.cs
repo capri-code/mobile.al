@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using mobile.al.Data;
 using mobile.al.Interfaces;
 using mobile.al.Models;
 using mobile.al.ViewModels;
-using System.Net;
+using mobile.al.Data;
+using mobile.al;
 
 namespace mobile.al.Controllers
 {
     public class CarController : Controller
     {
+
         private readonly ICarRepository _carRepository;
         private readonly IPhotoService _photoService;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -24,7 +24,6 @@ namespace mobile.al.Controllers
             IEnumerable<Car> cars = await _carRepository.GetAll();
             return View(cars);
         }
-
 
         public async Task<IActionResult> Detail(int id)
         {
@@ -42,27 +41,29 @@ namespace mobile.al.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateCarViewModel carVM)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var result = await _photoService.AddPhotoAsync(carVM.Image);
 
                 var car = new Car
                 {
-                    CarCategory = carVM.CarCategory,
-                    Title = carVM.Title,
+                    Make = carVM.Make,
+                    Category = carVM.Category,
                     Description = carVM.Description,
                     Price = carVM.Price,
                     Mileage = carVM.Mileage,
                     Image = result.Url.ToString(),
                     FuelTypeCategory = carVM.FuelTypeCategory,
                     GearBoxCategory = carVM.GearBoxCategory,
+                    Emission = carVM.Emission,
+                    Interior = carVM.Interior,
+                    Seller = carVM.Seller,
                     //DateProduced = carVM.DateProduced,
                     Accidented = carVM.Accidented,
                     Model = carVM.Model,
                     HorsePower = carVM.HorsePower,
                     Color = carVM.Color,
                     Extras = carVM.Extras,
-                    AppUserId = carVM.AppUserId,
                     Address = new Address
                     {
                         Street = carVM.Address.Street,
@@ -87,8 +88,11 @@ namespace mobile.al.Controllers
             if (car == null) return View("Error");
             var carVM = new EditCarViewModel
             {
-                CarCategory = car.CarCategory,
-                Title = car.Title,
+                Make = car.Make,
+                Category = car.Category,
+                Emission = car.Emission,
+                Interior = car.Interior,
+                Seller = car.Seller,
                 Description = car.Description,
                 Price = car.Price,
                 Mileage = car.Mileage,
@@ -132,8 +136,11 @@ namespace mobile.al.Controllers
 
                 var car = new Car
                 {
-                    CarCategory = carVM.CarCategory,
-                    Title = carVM.Title,
+                    Make = carVM.Make,
+                    Category = carVM.Category,
+                    Emission = carVM.Emission,
+                    Interior = carVM.Interior,
+                    Seller = carVM.Seller,
                     Description = carVM.Description,
                     Price = carVM.Price,
                     Mileage = carVM.Mileage,
@@ -178,6 +185,13 @@ namespace mobile.al.Controllers
             _carRepository.Delete(carDetails);
             return RedirectToAction("Index");
         }
+
+        //[HttpGet("{category}")]
+        //public IList<string> GetModelsForMake(CarCategory category)
+        //{
+        //    var models = CarMakeModelDictionary.GetCarMakeModelMap();
+        //    return models[category];
+        //}
 
     }
 }

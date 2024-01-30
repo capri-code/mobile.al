@@ -1,6 +1,6 @@
 ﻿namespace mobile.al.Data.Enum
 {
-	public enum FuelTypeCategory
+	public enum FuelType
 	{
 		Diesel,
 		Petrol,

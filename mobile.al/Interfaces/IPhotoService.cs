@@ -8,3 +8,4 @@ namespace mobile.al.Interfaces
         Task<DeletionResult> DeletePhotoAsync(string publicId);
     }
 }
+// https://learn.microsoft.com/en-us/ef/core/managing-schemas/scaffolding/?tabs=dotnet-core-cli

@@ -5,10 +5,10 @@ using System.Xml.Linq;
 
 namespace mobile.al.Models
 {
-    public class AppUser : IdentityUser
-    {
-        [Display(Name = "Full name")]
-        public string? FullName { get; set; }
+	public class AppUser : IdentityUser
+	{
+		[Display(Name = "Full name")]
+		public string? FullName { get; set; }
 		public string? ProfileImageUrl { get; set; }
 		public string? City { get; set; }
 		public string? State { get; set; }

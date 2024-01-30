@@ -6,11 +6,11 @@
 <form method="post" asp-action="Delete" enctype="multipart/form-data">
     <input type="hidden" value="AddressId" id="AddressId" />
     <div class="form-group">
-        <label asp-for="CarCategory">CarCategory</label>
-        <select asp-for="CarCategory" asp-items="@Html.GetEnumSelectList<CarCategory>()" class="form-control form-control form-control-lg">
+        <label asp-for="Make">Make</label>
+        <select asp-for="Make" asp-items="@Html.GetEnumSelectList<Make>()" class="form-control form-control form-control-lg">
             <option>--Select--</option>
         </select>
-        <span asp-validation-for="CarCategory" class="text-danger"></span>
+        <span asp-validation-for="Make" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Price">Price</label>
@@ -18,9 +18,9 @@
         <span asp-validation-for="Price" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Title">Title</label>
-        <input asp-for="Title" class="form-control" placeholder="Enter email">
-        <span asp-validation-for="Title" class="text-danger"></span>
+        <label asp-for="Category">Category</label>
+        <input asp-for="Category" class="form-control" placeholder="Enter email">
+        <span asp-validation-for="Category" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Image">Image</label>
@@ -49,14 +49,14 @@
     </div>
     <div class="form-group">
         <label asp-for="GearBoxCategory">GearBoxCategory</label>
-        <select asp-for="GearBoxCategory" asp-items="@Html.GetEnumSelectList<GearBoxCategory>()" class="form-control form-control form-control-lg">
+        <select asp-for="GearBoxCategory" asp-items="@Html.GetEnumSelectList<GearBox>()" class="form-control form-control form-control-lg">
             <option>--Select--</option>
         </select>
         <span asp-validation-for="GearBoxCategory" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="FuelTypeCategory">FuelTypeCategory</label>
-        <select asp-for="FuelTypeCategory" asp-items="@Html.GetEnumSelectList<FuelTypeCategory>()" class="form-control form-control form-control-lg">
+        <select asp-for="FuelTypeCategory" asp-items="@Html.GetEnumSelectList<FuelType>()" class="form-control form-control form-control-lg">
             <option>--Select--</option>
         </select>
         <span asp-validation-for="FuelTypeCategory" class="text-danger"></span>

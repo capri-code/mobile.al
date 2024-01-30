@@ -1,6 +1,6 @@
 ﻿namespace mobile.al.Data.Enum
 {
-	public enum GearBoxCategory
+	public enum GearBox
 	{
 		Automatic,
         Manual,

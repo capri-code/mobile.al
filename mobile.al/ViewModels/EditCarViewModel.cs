@@ -8,21 +8,24 @@ namespace mobile.al.ViewModels
         public int Id { get; set; }
         public string Description { get; set; }
         public float Price { get; set; }
-		public long Mileage { get; set; }
-		public IFormFile Image { get; set; }
+        public long Mileage { get; set; }
+        public IFormFile Image { get; set; }
         //public DateTime DateProduced { get; set; }
         //public DateTime DateAdded { get; set; }
         public bool? Accidented { get; set; }
         public string Model { get; set; }
         public int HorsePower { get; set; }
-        public GearBoxCategory GearBoxCategory { get; set; }
-        public FuelTypeCategory FuelTypeCategory { get; set; }
+        public GearBox GearBoxCategory { get; set; }
+        public FuelType FuelTypeCategory { get; set; }
         public string Color { get; set; }
-        public string Extras { get; set; }
-        public string Title { get; set; }
+        public Category Category { get; set; }
+        public Emission Emission { get; set; }
+        public Extras Extras { get; set; }
+        public Interior Interior { get; set; }
+        public Seller Seller { get; set; }
         public string? URL { get; set; }
-        public int AddressId { get; set; }
+        public int? AddressId { get; set; }
         public Address Address { get; set; }
-        public CarCategory CarCategory { get; set; }
+        public Make Make { get; set; }
     }
 }
