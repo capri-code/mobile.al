@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using mobile.al.Data;
 
@@ -11,9 +12,10 @@ using mobile.al.Data;
 namespace mobile.al.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240202180508_AddDateCreated")]
+    partial class AddDateCreated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -310,6 +312,10 @@ namespace mobile.al.Migrations
                     b.Property<int>("HorsePower")
                         .HasColumnType("int");
 
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Interior")
                         .HasColumnType("int");
 
@@ -319,17 +325,15 @@ namespace mobile.al.Migrations
                     b.Property<long>("Mileage")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("Model")
-                        .HasColumnType("int");
+                    b.Property<string>("Model")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
                     b.Property<int>("Seller")
                         .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -338,28 +342,6 @@ namespace mobile.al.Migrations
                     b.HasIndex("AppUserId");
 
                     b.ToTable("Cars");
-                });
-
-            modelBuilder.Entity("mobile.al.Models.CarPhoto", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CarId");
-
-                    b.ToTable("CarPhotos");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -437,25 +419,9 @@ namespace mobile.al.Migrations
                     b.Navigation("AppUser");
                 });
 
-            modelBuilder.Entity("mobile.al.Models.CarPhoto", b =>
-                {
-                    b.HasOne("mobile.al.Models.Car", "Car")
-                        .WithMany("Photos")
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Car");
-                });
-
             modelBuilder.Entity("mobile.al.Models.AppUser", b =>
                 {
                     b.Navigation("Cars");
-                });
-
-            modelBuilder.Entity("mobile.al.Models.Car", b =>
-                {
-                    b.Navigation("Photos");
                 });
 #pragma warning restore 612, 618
         }

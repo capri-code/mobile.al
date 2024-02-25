@@ -26,12 +26,18 @@ namespace mobile.al.Repository
 
         public async Task<IEnumerable<Car>> GetAll()
         {
-            return await _context.Cars.ToListAsync();
+            return await _context.Cars
+                .Include(i => i.Address)
+                .Include(i => i.Photos)
+                .ToListAsync();
         }
 
         public async Task<Car> GetByIdAsync(int id)
         {
-            return await _context.Cars.Include(i => i.Address).FirstOrDefaultAsync(i => i.Id == id);
+            return await _context.Cars
+                .Include(i => i.Address)
+                .Include(i => i.Photos)
+                .FirstOrDefaultAsync(i => i.Id == id);
         }
 
         public async Task<Car> GetByIdAsyncNoTracking(int id)

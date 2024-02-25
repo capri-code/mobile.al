@@ -18,6 +18,28 @@ namespace mobile.al.Services
                 );
             _cloudinary = new Cloudinary(acc);
         }
+
+        public async Task<List<ImageUploadResult>> AddPhotoAsync(List<IFormFile> files)
+        {
+            var uploadResults = new List<ImageUploadResult>();
+            foreach (var file in files)
+            {
+                if (file.Length > 0)
+                {
+                    using var stream = file.OpenReadStream();
+                    var uploadParams = new ImageUploadParams
+                    {
+                        File = new FileDescription(file.FileName, stream),
+                        Transformation = new Transformation().Height(500).Width(700).Crop("fill").Gravity("face")
+                    };
+                    var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+                    uploadResults.Add(uploadResult);
+                }
+            }
+
+            return uploadResults;
+        }
+
         public async Task<ImageUploadResult> AddPhotoAsync(IFormFile file)
         {
             var uploadResult = new ImageUploadResult();
@@ -27,7 +49,7 @@ namespace mobile.al.Services
                 var uploadParams = new ImageUploadParams
                 {
                     File = new FileDescription(file.FileName, stream),
-                    Transformation = new Transformation().Height(500).Width(500).Crop("fill").Gravity("face")
+                    Transformation = new Transformation().Height(500).Width(700).Crop("fill").Gravity("face")
                 };
                 uploadResult = await _cloudinary.UploadAsync(uploadParams);
             }

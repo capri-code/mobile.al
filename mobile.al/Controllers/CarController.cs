@@ -2,8 +2,6 @@
 using mobile.al.Interfaces;
 using mobile.al.Models;
 using mobile.al.ViewModels;
-using mobile.al.Data;
-using mobile.al;
 
 namespace mobile.al.Controllers
 {
@@ -43,7 +41,16 @@ namespace mobile.al.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _photoService.AddPhotoAsync(carVM.Image);
+                var uploadResults = await _photoService.AddPhotoAsync(carVM.Images);
+
+                DateTime minDate = new DateTime(1980, 1, 1);
+                DateTime maxDate = DateTime.Now;
+
+                if (carVM.FirstRegistration < minDate || carVM.FirstRegistration > maxDate)
+                {
+                    ModelState.AddModelError("FirstRegistration", "First registration must be between 1980-01-01 and the current date");
+                    return View(carVM);
+                }
 
                 var car = new Car
                 {
@@ -52,18 +59,21 @@ namespace mobile.al.Controllers
                     Description = carVM.Description,
                     Price = carVM.Price,
                     Mileage = carVM.Mileage,
-                    Image = result.Url.ToString(),
+                    Photos = uploadResults.Select(result => new CarPhoto { Url = result.SecureUrl.AbsoluteUri }).ToList(),
                     FuelTypeCategory = carVM.FuelTypeCategory,
                     GearBoxCategory = carVM.GearBoxCategory,
                     Emission = carVM.Emission,
                     Interior = carVM.Interior,
                     Seller = carVM.Seller,
-                    //DateProduced = carVM.DateProduced,
+                    CreatedAt = DateTime.UtcNow,
+                    FirstRegistration = carVM.FirstRegistration,
                     Accidented = carVM.Accidented,
                     Model = carVM.Model,
                     HorsePower = carVM.HorsePower,
                     Color = carVM.Color,
                     Extras = carVM.Extras,
+                    NrOfOwners = carVM.NrOfOwners,
+                    AppUserId = carVM.AppUserId,
                     Address = new Address
                     {
                         Street = carVM.Address.Street,
@@ -96,13 +106,15 @@ namespace mobile.al.Controllers
                 Description = car.Description,
                 Price = car.Price,
                 Mileage = car.Mileage,
-                URL = car.Image,
-                //DateAdded = car.DateAdded,
+                AddressId = car.AddressId,
+                Address = car.Address,
+                URL = car.Photos,
+                UpdatedAt = DateTime.UtcNow,
                 FuelTypeCategory = car.FuelTypeCategory,
                 GearBoxCategory = car.GearBoxCategory,
-                //DateProduced = car.DateProduced,
                 Accidented = car.Accidented,
                 Model = car.Model,
+                NrOfOwners = car.NrOfOwners,
                 HorsePower = car.HorsePower,
                 Color = car.Color,
                 Extras = car.Extras,
@@ -119,46 +131,43 @@ namespace mobile.al.Controllers
                 return View("Edit", carVM);
             }
 
-            var userCar = await _carRepository.GetByIdAsyncNoTracking(id);
+            var existingCar = await _carRepository.GetByIdAsyncNoTracking(id);
 
-            if (userCar != null)
+            if (existingCar != null)
             {
                 try
                 {
-                    await _photoService.DeletePhotoAsync(userCar.Image);
+                    //await _photoService.DeletePhotoAsync(existingCar.PhotoUrls);
                 }
                 catch (Exception ex)
                 {
                     ModelState.AddModelError("", "Could not delete photo");
                     return View(carVM);
                 }
-                var photoResult = await _photoService.AddPhotoAsync(carVM.Image);
+                var uploadResults = await _photoService.AddPhotoAsync(carVM.Images);
 
-                var car = new Car
-                {
-                    Make = carVM.Make,
-                    Category = carVM.Category,
-                    Emission = carVM.Emission,
-                    Interior = carVM.Interior,
-                    Seller = carVM.Seller,
-                    Description = carVM.Description,
-                    Price = carVM.Price,
-                    Mileage = carVM.Mileage,
-                    Image = photoResult.Url.ToString(),
-                    //DateAdded = carVM.DateAdded,
-                    FuelTypeCategory = carVM.FuelTypeCategory,
-                    GearBoxCategory = carVM.GearBoxCategory,
-                    //DateProduced = carVM.DateProduced,
-                    Accidented = carVM.Accidented,
-                    Model = carVM.Model,
-                    HorsePower = carVM.HorsePower,
-                    Color = carVM.Color,
-                    Extras = carVM.Extras,
-                    AddressId = carVM.AddressId,
-                    Address = carVM.Address,
-                };
+                existingCar.Make = carVM.Make;
+                existingCar.Category = carVM.Category;
+                existingCar.Emission = carVM.Emission;
+                existingCar.Interior = carVM.Interior;
+                existingCar.Seller = carVM.Seller;
+                existingCar.Description = carVM.Description;
+                existingCar.Price = carVM.Price;
+                existingCar.Mileage = carVM.Mileage;
+                existingCar.UpdatedAt = DateTime.UtcNow;
+                existingCar.FuelTypeCategory = carVM.FuelTypeCategory;
+                existingCar.GearBoxCategory = carVM.GearBoxCategory;
+                existingCar.Accidented = carVM.Accidented;
+                existingCar.Model = carVM.Model;
+                existingCar.HorsePower = carVM.HorsePower;
+                existingCar.Color = carVM.Color;
+                existingCar.NrOfOwners = carVM.NrOfOwners;
+                existingCar.Extras = carVM.Extras;
+                existingCar.AddressId = carVM.AddressId;
+                existingCar.Address = carVM.Address;
+                existingCar.Photos.AddRange(uploadResults.Select(result => new CarPhoto { Url = result.SecureUrl.AbsoluteUri }));
 
-                _carRepository.Update(car);
+                _carRepository.Update(existingCar);
 
                 return RedirectToAction("Index");
             }
@@ -185,13 +194,6 @@ namespace mobile.al.Controllers
             _carRepository.Delete(carDetails);
             return RedirectToAction("Index");
         }
-
-        //[HttpGet("{category}")]
-        //public IList<string> GetModelsForMake(CarCategory category)
-        //{
-        //    var models = CarMakeModelDictionary.GetCarMakeModelMap();
-        //    return models[category];
-        //}
 
     }
 }

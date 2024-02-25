@@ -1,8 +1,13 @@
-﻿namespace mobile.al.Data.Enum
+﻿using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
+
+namespace mobile.al.Data.Enum
 {
     public enum Make
     {
-		AlfaRomeo,
+        [Display(Name = "Alfa Romeo")]
+        AlfaRomeo,
+        [Display(Name = "Aston Martin")]
         AstonMartin,
         Audi,
         Bentley,
@@ -32,6 +37,7 @@
         Maserati,
         Mazda,
         McLaren,
+        [Display(Name = "Mercedes-Benz")]
         MercedesBenz,
         MINI,
         Mitsubishi,
@@ -41,6 +47,7 @@
         Peugeot,
         Porsche,
         Renault,
+        [Display(Name = "Rolls-Royce")]
         RollsRoyce,
         Seat,
         Skoda,
@@ -50,5 +57,5 @@
         Toyota,
         Volkswagen,
         Volvo
-	}
+    }
 }

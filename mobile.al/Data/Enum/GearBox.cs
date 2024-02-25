@@ -1,9 +1,13 @@
-﻿namespace mobile.al.Data.Enum
+﻿using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
+
+namespace mobile.al.Data.Enum
 {
-	public enum GearBox
+    public enum GearBox
 	{
-		Automatic,
+        Automatic,
         Manual,
+        [Display(Name = "Semi-Automatic")]
         SemiAutomatic
-	}
+    }
 }

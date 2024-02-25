@@ -39,9 +39,9 @@
         <span asp-validation-for="Category" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Image">Image</label>
-        <input asp-for="Image" type="file" class="form-control" placeholder="Image">
-        <span asp-validation-for="Image" class="text-danger"></span>
+        <label asp-for="Images" class="control-label"></label>
+        <input asp-for="Images" type="file" accept="image/*" multiple>
+        <span asp-validation-for="Images" class="text-danger"></span>
     </div>
    @* <div>
         <h1>Upload Photos</h1>
@@ -69,8 +69,13 @@
         <span asp-validation-for="Accidented" class="text-danger"></span>
     </div>
     <div class="form-group">
+        <label asp-for="FirstRegistration" class="control-label">First Registration:</label>
+        <input asp-for="FirstRegistration" class="form-control" type="date" />
+        <span asp-validation-for="FirstRegistration" class="text-danger"></span>
+    </div>
+    <div class="form-group">
         <label asp-for="Model">Model</label>
-        <input asp-for="Model" class="form-control" placeholder="Enter Model">
+        <input asp-for="Model" class="form-control" placeholder="Model">
         <span asp-validation-for="Model" class="text-danger"></span>
     </div>
     <div class="form-group">
@@ -124,6 +129,11 @@
             <option>--Select--</option>
         </select>
         <span asp-validation-for="Emission" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="NrOfOwners">Owners: </label>
+        <input asp-for="NrOfOwners" class="form-control" placeholder="NrOfOwners">
+        <span asp-validation-for="NrOfOwners" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Address.Street">Street</label>

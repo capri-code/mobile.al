@@ -10,26 +10,28 @@ namespace mobile.al.Models
         [Key]
         public int Id { get; set; }
         public string? Description { get; set; }
-        public float Price { get; set; }
+        [Required(ErrorMessage = "Duhet vendosur cmimi")]
+        [Range(0, double.MaxValue, ErrorMessage = "Cmimi duhet te jete nje vlere pozitive ose 0")]
+        public double Price { get; set; }
         public long Mileage { get; set; }
         public Category Category { get; set; }
         public Emission Emission { get; set; }
         public Extras Extras { get; set; }
         public Interior Interior { get; set; }
         public Seller Seller { get; set; }
-        public string Image { get; set; }
-        //public bool IsAvailable { get; set; }
-        //public bool IsDeleted { get; set; }
-        //public DateTime CreatedAt { get; set; }
-        //public DateTime? UpdatedAt { get; set; }
-        //public DateTime FirstRegistration { get; set; }
+        public List<CarPhoto> Photos { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public DateTime? FirstRegistration { get; set; }
         public bool? Accidented { get; set; }
+        [Required]
         public string Model { get; set; }
         public int HorsePower { get; set; }
         public GearBox GearBoxCategory { get; set; }
         public FuelType FuelTypeCategory { get; set; }
         public string Color { get; set; }
         public Make Make { get; set; }
+        public short NrOfOwners { get; set; }
         [ForeignKey("Address")]
         public int? AddressId { get; set; }
         public Address? Address { get; set; }

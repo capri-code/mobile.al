@@ -37,6 +37,7 @@ namespace mobile.al.Controllers
                 Id = user.Id,
                 UserName = user.UserName,
                 FullName = user.FullName,
+                ProfileImageUrl = user.ProfileImageUrl,
             };
             return View(userDetailViewModel);
         }

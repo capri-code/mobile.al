@@ -5,7 +5,7 @@ namespace mobile.al.Interfaces
     public interface IPhotoService
     {
         Task<ImageUploadResult> AddPhotoAsync(IFormFile file);
+        Task<List<ImageUploadResult>> AddPhotoAsync(List<IFormFile> files);
         Task<DeletionResult> DeletePhotoAsync(string publicId);
     }
 }
-// https://learn.microsoft.com/en-us/ef/core/managing-schemas/scaffolding/?tabs=dotnet-core-cli

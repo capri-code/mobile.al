@@ -1,5 +1,148 @@
 ﻿@model IEnumerable<Car>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Selling Website</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Add your custom CSS styles here -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #495057;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0;
+        }
+
+        .car-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .car-card {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 16px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+            .car-card:hover {
+                transform: scale(1.05);
+            }
+
+        .car-image {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .car-details {
+            padding: 16px;
+        }
+
+        .car-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .car-info {
+            color: #6c757d;
+            margin-bottom: 8px;
+        }
+
+        .car-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #28a745; /* Green color for price */
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            text-align: center;
+            background-color: #ffffff;
+            border-top: 1px solid #dee2e6;
+            transition: background-color 0.3s;
+        }
+
+            a:hover {
+                background-color: #f8f9fa;
+            }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Welcome to our Car Selling Website</h1>
+    </header>
+
+    <div class="car-container">
+        @foreach (var car in Model)
+        {
+            <div class="car-card">
+                @if (car.Photos != null && car.Photos.Any())
+                {
+                    <img class="car-photo" src="@car.Photos.First().Url" onclick="toggleFullScreenImage('@car.Photos.First().Url')" />
+                }
+                else
+                {
+                    <p>No photos available</p>
+                }
+                <div class="car-details">
+                    <div class="car-title">@car.Make</div>
+                    <div class="car-info">
+                        <p>@car.Make @car.Model</p>
+                        <p>Year: @car.FirstRegistration</p>
+                    </div>
+                    <div class="car-price">@car.Price€</div>
+                </div>
+
+                @*<a type="btn btn-success" asp-controller="Car" asp-action="Detail" asp-route-id="@car.Id" class="btn btn-sm btn-outline-secondary">View details</a>*@
+                @*<a href="@Url.Action("Details", new { id = car.Id })">View Details</a>*@
+                <a asp-controller="Car" asp-action="Detail" asp-route-id="@car.Id">View details</a>
+                @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                {
+                    <a asp-controller="Car" asp-action="Edit" asp-route-id="@car.Id">Edit</a>
+                    <a asp-controller="Car" asp-action="Delete" asp-route-id="@car.Id">Delete</a>
+                }
+            </div>
+        }
+    </div>
+
+    <!-- Add your additional HTML content, scripts, or footer here -->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+@*@model IEnumerable<Car>
+
 <div class="text-center">
     <h1 class="display-4 text-black">Today's Deals</h1>
 
@@ -7,7 +150,7 @@
 
 <div class="d-flex flex-column" style="gap: 16px">
     <div class="card flex-row">
-        @foreach(var item in Model)
+        @foreach (var item in Model)
         {
             <img alt="Car image"
                  class="card-img-left example-card-img-responsive m-3"
@@ -30,54 +173,4 @@
             </div>
         }
     </div>
-
-
-    @*<div class="card flex-row mb-4">
-        <img alt="Car image"
-             class="card-img-left example-card-img-responsive m-3"
-             src="https://www.newcarz.de/wp-content/uploads/2020/06/newcarz-bmw-4er-coupe-1.jpg"
-             width="328"
-             height="260"
-             style="background-size: contain"
-             draggable="false" />
-        <div class="card-body">
-            <h4 class="card-title h5 h4-sm"><strong>BMW 4er Series M4 COMPETITION</strong></h4>
-            <h5>Price: $115.000</h5>
-            <h6>Km: 20.000km</h6>
-            <p class="card-text">Lorem ipsum dolor sit amed.</p>
-            <a href="#" class="btn btn-primary">View details</a>
-        </div>
-    </div>
-    <div class="card flex-row">
-        <img alt="Car image"
-             class="card-img-left example-card-img-responsive m-3"
-             src="https://cdn.pixabay.com/photo/2016/06/20/22/35/mercedes-benz-1470136_640.jpg"
-             width="328"
-             height="260"
-             style="background-size: contain"
-             draggable="false" />
-        <div class="card-body">
-            <h4 class="card-title h5 h4-sm"><strong>Mercedes-Benz GT63s AMG 4MATIC 360Deg</strong></h4>
-            <h5>Price: $184.000</h5>
-            <h6>Km: 61.000km</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">View details</a>
-        </div>
-    </div>
-    <div class="card flex-row">
-        <img alt="Car image"
-             class="card-img-left example-card-img-responsive m-3"
-             src="https://cdn.pixabay.com/photo/2016/06/20/22/35/mercedes-benz-1470136_640.jpg"
-             width="328"
-             height="260"
-             style="background-size: contain"
-             draggable="false" />
-        <div class="card-body">
-            <h4 class="card-title h5 h4-sm"><strong>Mercedes-Benz GT63s AMG 4MATIC 360Deg</strong></h4>
-            <h5>Price: $184.000</h5>
-            <h6>Km: 61.000km</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">View details</a>
-        </div>
-    </div>*@
-</div>
+</div>*@

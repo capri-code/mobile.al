@@ -10,7 +10,7 @@ namespace mobile.al.Models
 		[Display(Name = "Full name")]
 		public string? FullName { get; set; }
 		public string? ProfileImageUrl { get; set; }
-		public string? City { get; set; }
+        public string? City { get; set; }
 		public string? State { get; set; }
 		[ForeignKey("Address")]
 		public int? AddressId { get; set; }

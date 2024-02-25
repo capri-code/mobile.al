@@ -18,14 +18,21 @@
         <span asp-validation-for="Price" class="text-danger"></span>
     </div>
     <div class="form-group">
+        <label asp-for="Mileage">Mileage</label>
+        <input asp-for="Mileage" class="form-control" placeholder="Enter Mileage">
+        <span asp-validation-for="Mileage" class="text-danger"></span>
+    </div>
+    <div class="form-group">
         <label asp-for="Category">Category</label>
-        <input asp-for="Category" class="form-control" placeholder="Enter email">
+        <select asp-for="Category" asp-items="@Html.GetEnumSelectList<Category>()" class="form-control form-control form-control-lg">
+            <option>--Select--</option>
+        </select>
         <span asp-validation-for="Category" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Image">Image</label>
-        <input asp-for="Image" type="file" class="form-control" placeholder="Image">
-        <span asp-validation-for="Image" class="text-danger"></span>
+        <label asp-for="Photos">Photos</label>
+        <input asp-for="Photos" type="file" class="form-control" placeholder="Photos">
+        <span asp-validation-for="Photos" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Description">Description</label>
@@ -36,6 +43,11 @@
         <label asp-for="Accidented">Accidented</label>
         <input asp-for="Accidented" class="form-control" placeholder="Accidented">
         <span asp-validation-for="Accidented" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="FirstRegistration" class="control-label">First Registration:</label>
+        <input asp-for="FirstRegistration" class="form-control" type="date" />
+        <span asp-validation-for="FirstRegistration" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Model">Model</label>
@@ -68,8 +80,36 @@
     </div>
     <div class="form-group">
         <label asp-for="Extras">Extras</label>
-        <input asp-for="Extras" class="form-control" placeholder="Extras">
+        <select asp-for="Extras" asp-items="@Html.GetEnumSelectList<Extras>()" class="form-control form-control form-control-lg">
+            <option>--Select--</option>
+        </select>
         <span asp-validation-for="Extras" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Interior">Interior</label>
+        <select asp-for="Interior" asp-items="@Html.GetEnumSelectList<Interior>()" class="form-control form-control form-control-lg">
+            <option>--Select--</option>
+        </select>
+        <span asp-validation-for="Interior" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Seller">Seller</label>
+        <select asp-for="Seller" asp-items="@Html.GetEnumSelectList<Seller>()" class="form-control form-control form-control-lg">
+            <option>--Select--</option>
+        </select>
+        <span asp-validation-for="Seller" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Emission">Emission</label>
+        <select asp-for="Emission" asp-items="@Html.GetEnumSelectList<Emission>()" class="form-control form-control form-control-lg">
+            <option>--Select--</option>
+        </select>
+        <span asp-validation-for="Emission" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="NrOfOwners">NrOfOwners</label>
+        <input asp-for="NrOfOwners" class="form-control" placeholder="NrOfOwners">
+        <span asp-validation-for="NrOfOwners" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Address.Street">Street</label>
