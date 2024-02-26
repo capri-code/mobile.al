@@ -23,15 +23,16 @@ namespace mobile.al.Models
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public DateTime? FirstRegistration { get; set; }
-        public bool? Accidented { get; set; }
+        public Accidented? Accidented { get; set; }
         [Required]
-        public string Model { get; set; }
+        public string? Model { get; set; }
         public int HorsePower { get; set; }
         public GearBox GearBoxCategory { get; set; }
         public FuelType FuelTypeCategory { get; set; }
         public string Color { get; set; }
         public Make Make { get; set; }
         public short NrOfOwners { get; set; }
+        public string? PhoneNumber { get; set; }
         [ForeignKey("Address")]
         public int? AddressId { get; set; }
         public Address? Address { get; set; }

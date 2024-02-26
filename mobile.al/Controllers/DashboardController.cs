@@ -21,6 +21,7 @@ namespace mobile.al.Controllers
         {
             user.Id = editVM.Id;
             user.FullName = editVM.FullName;
+            user.PhoneNumber = editVM.PhoneNumber;
             user.ProfileImageUrl = photoResult.Url.ToString();
             user.City = editVM.City;
             user.State = editVM.State;
@@ -44,6 +45,7 @@ namespace mobile.al.Controllers
             {
                 Id = curUserId,
                 FullName = user.FullName,
+                PhoneNumber = user.PhoneNumber,
                 ProfileImageUrl = user.ProfileImageUrl,
                 City = user.City,
                 State = user.State,

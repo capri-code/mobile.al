@@ -17,7 +17,7 @@ namespace mobile.al.ViewModels
         {
             if (value is DateTime dateValue)
             {
-                if (dateValue < _maxDate || dateValue > _minDate)
+                if (dateValue < _minDate || dateValue > _maxDate)
                 {
                     return new ValidationResult($"The field {validationContext.DisplayName} must be between {_minDate.ToShortDateString()} and {_maxDate.ToShortDateString()}.");
                 }

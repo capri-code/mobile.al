@@ -73,6 +73,7 @@ namespace mobile.al.Controllers
                     Color = carVM.Color,
                     Extras = carVM.Extras,
                     NrOfOwners = carVM.NrOfOwners,
+                    PhoneNumber = carVM.PhoneNumber,
                     AppUserId = carVM.AppUserId,
                     Address = new Address
                     {
@@ -115,6 +116,7 @@ namespace mobile.al.Controllers
                 Accidented = car.Accidented,
                 Model = car.Model,
                 NrOfOwners = car.NrOfOwners,
+                PhoneNumber = car.PhoneNumber,
                 HorsePower = car.HorsePower,
                 Color = car.Color,
                 Extras = car.Extras,
@@ -137,39 +139,40 @@ namespace mobile.al.Controllers
             {
                 try
                 {
-                    //await _photoService.DeletePhotoAsync(existingCar.PhotoUrls);
+                    //return View("Error");
+                    var uploadResults = await _photoService.AddPhotoAsync(carVM.Images);
+
+                    existingCar.Make = carVM.Make;
+                    existingCar.Category = carVM.Category;
+                    existingCar.Emission = carVM.Emission;
+                    existingCar.Interior = carVM.Interior;
+                    existingCar.Seller = carVM.Seller;
+                    existingCar.Description = carVM.Description;
+                    existingCar.Price = carVM.Price;
+                    existingCar.Mileage = carVM.Mileage;
+                    existingCar.UpdatedAt = DateTime.UtcNow;
+                    existingCar.FuelTypeCategory = carVM.FuelTypeCategory;
+                    existingCar.GearBoxCategory = carVM.GearBoxCategory;
+                    existingCar.Accidented = carVM.Accidented;
+                    existingCar.Model = carVM.Model;
+                    existingCar.HorsePower = carVM.HorsePower;
+                    existingCar.Color = carVM.Color;
+                    existingCar.NrOfOwners = carVM.NrOfOwners;
+                    existingCar.PhoneNumber = carVM.PhoneNumber;
+                    existingCar.Extras = carVM.Extras;
+                    existingCar.AddressId = carVM.AddressId;
+                    existingCar.Address = carVM.Address;
+                    existingCar.Photos = uploadResults.Select(result => new CarPhoto { Url = result.SecureUrl.AbsoluteUri }).ToList();
+
+                    _carRepository.Update(existingCar);
+
+                    return RedirectToAction("Index");
                 }
                 catch (Exception ex)
                 {
                     ModelState.AddModelError("", "Could not delete photo");
                     return View(carVM);
                 }
-                var uploadResults = await _photoService.AddPhotoAsync(carVM.Images);
-
-                existingCar.Make = carVM.Make;
-                existingCar.Category = carVM.Category;
-                existingCar.Emission = carVM.Emission;
-                existingCar.Interior = carVM.Interior;
-                existingCar.Seller = carVM.Seller;
-                existingCar.Description = carVM.Description;
-                existingCar.Price = carVM.Price;
-                existingCar.Mileage = carVM.Mileage;
-                existingCar.UpdatedAt = DateTime.UtcNow;
-                existingCar.FuelTypeCategory = carVM.FuelTypeCategory;
-                existingCar.GearBoxCategory = carVM.GearBoxCategory;
-                existingCar.Accidented = carVM.Accidented;
-                existingCar.Model = carVM.Model;
-                existingCar.HorsePower = carVM.HorsePower;
-                existingCar.Color = carVM.Color;
-                existingCar.NrOfOwners = carVM.NrOfOwners;
-                existingCar.Extras = carVM.Extras;
-                existingCar.AddressId = carVM.AddressId;
-                existingCar.Address = carVM.Address;
-                existingCar.Photos.AddRange(uploadResults.Select(result => new CarPhoto { Url = result.SecureUrl.AbsoluteUri }));
-
-                _carRepository.Update(existingCar);
-
-                return RedirectToAction("Index");
             }
             else
             {

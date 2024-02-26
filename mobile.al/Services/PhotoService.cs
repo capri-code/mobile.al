@@ -30,7 +30,7 @@ namespace mobile.al.Services
                     var uploadParams = new ImageUploadParams
                     {
                         File = new FileDescription(file.FileName, stream),
-                        Transformation = new Transformation().Height(500).Width(700).Crop("fill").Gravity("face")
+                        Transformation = new Transformation().Height(500).Width(600).Crop("fill").Gravity("face")
                     };
                     var uploadResult = await _cloudinary.UploadAsync(uploadParams);
                     uploadResults.Add(uploadResult);
@@ -49,7 +49,7 @@ namespace mobile.al.Services
                 var uploadParams = new ImageUploadParams
                 {
                     File = new FileDescription(file.FileName, stream),
-                    Transformation = new Transformation().Height(500).Width(700).Crop("fill").Gravity("face")
+                    Transformation = new Transformation().Height(100).Width(100).Crop("fill").Gravity("face")
                 };
                 uploadResult = await _cloudinary.UploadAsync(uploadParams);
             }

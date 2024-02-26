@@ -29,6 +29,15 @@
                         <span asp-validation-for="FullName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
+                        <ol class="row">
+                            <li class="cell" style="width: 20%;">Phone Number:</li>
+                            <li class="cell last" style="width: 60%;">
+                                @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "textbox" })
+                                @Html.ValidationMessageFor(model => model.PhoneNumber)
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="form-group">
                         <label asp-for="EmailAddress" class="control-label"></label>
                         <input asp-for="EmailAddress" class="form-control" />
                         <span asp-validation-for="EmailAddress" class="text-danger"></span>

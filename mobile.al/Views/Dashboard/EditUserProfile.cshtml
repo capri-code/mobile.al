@@ -4,8 +4,19 @@
 
 <form method="post" asp-action="EditUserProfile" enctype="multipart/form-data">
     <input type="hidden" id="Id" name="Id" asp-for="Id" />
-    <div>
-
+    <div class="form-group">
+        <label asp-for="FullName">Full Name</label>
+        <input asp-for="FullName" class="form-control" placeholder="Full Name">
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <ol class="row">
+            <li class="cell" style="width: 20%;">Phone Number:</li>
+            <li class="cell last" style="width: 60%;">
+                @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "textbox" })
+                @Html.ValidationMessageFor(model => model.PhoneNumber)
+            </li>
+        </ol>
     </div>
     <div class="form-group">
         <label asp-for="City">City</label>

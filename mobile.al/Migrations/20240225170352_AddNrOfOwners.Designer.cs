@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using mobile.al.Data;
 
@@ -11,9 +12,10 @@ using mobile.al.Data;
 namespace mobile.al.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240225170352_AddNrOfOwners")]
+    partial class AddNrOfOwners
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -270,8 +272,8 @@ namespace mobile.al.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("Accidented")
-                        .HasColumnType("int");
+                    b.Property<bool?>("Accidented")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("AddressId")
                         .HasColumnType("int");
@@ -325,9 +327,6 @@ namespace mobile.al.Migrations
 
                     b.Property<short>("NrOfOwners")
                         .HasColumnType("smallint");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");

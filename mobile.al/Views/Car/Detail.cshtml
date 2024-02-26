@@ -45,8 +45,8 @@
     }
 
     #photoGallery {
-        max-width: 500px;
-        margin: 20px auto;
+        max-width: 600px;
+        margin: 80px auto;
         overflow: hidden;
     }
 
@@ -77,37 +77,17 @@
 
     #prevButton {
         left: 10px;
+        top: 400px
     }
 
     #nextButton {
         right: 10px;
+        top: 400px
     }
 </style>
 
 <div class="main-container">
-    <nav aria-label="breadcrumb" role="navigation" class="bg-primary text-black">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a href="index.html">Home</a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="pages-app.html">Find</a>
-                        </li>
-                        @if (Model != null)
-                        {
-                            <li class="breadcrumb-item active" aria-current="page">Location of this Car: @Model.Address.City, @Model.Address.State</li>
-                        }
-                    </ol>
-                </div>
-                <!--end of col-->
-            </div>
-            <!--end of row-->
-        </div>
-        <!--end of container-->
-    </nav>
+    
     <section class="bg-white space-sm">
         <div class="container">
             <div class="row">
@@ -125,10 +105,8 @@
                             <p>No photos available</p>
                         }
                     </div>
-                    <button id="prevButton" onclick="changePhoto(-1)">Previous</button>
-                    <button id="nextButton" onclick="changePhoto(1)">Next</button>
-                    @*<img alt="Image" src="@Model.Photos" class="img-fluid" onclick="toggleFullScreenImage('@Model.Photos')" />
-                    <img alt="Image" src="@Model.Image" class="rounded img-fluid" />*@
+                    <button id="prevButton" onclick="changePhoto(-1)">&laquo;</button>
+                    <button id="nextButton" onclick="changePhoto(1)">&raquo;</button>
                 </div>
                 <!--end of col-->
                 @if (Model != null)
@@ -140,6 +118,12 @@
                                     <div class="d-flex justify-content-between">
                                         <div><i class="icon-text-document mr-1"></i> Make</div>
                                         <span>@Model.Make</span>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <div><i class="icon-text-document mr-1"></i> Model</div>
+                                        <span>@Model.Model</span>
                                     </div>
                                 </li>
                                 <li class="list-group-item">
@@ -187,7 +171,25 @@
                                 <li class="list-group-item">
                                     <div class="d-flex justify-content-between">
                                         <div><i class="icon-text-document mr-1"></i> First Registration</div>
-                                        <span>@Model.FirstRegistration</span>
+                                        <span>@(Model.FirstRegistration.HasValue ? Model.FirstRegistration.Value.ToString("dd/MM/yyyy") : "N/A")</span>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <div><i class="icon-text-document mr-1"></i> Seller</div>
+                                        <span>@Model.Seller</span>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <div><i class="icon-text-document mr-1"></i> Extras</div>
+                                        <span>@Model.Extras</span>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <div><i class="icon-text-document mr-1"></i> Emission</div>
+                                        <span>@Model.Emission</span>
                                     </div>
                                 </li>
                                 <li class="list-group-item">
@@ -198,14 +200,14 @@
                                 </li>
                                 <li class="list-group-item">
                                     <div class="d-flex justify-content-between">
-                                        <div><i class="icon-edit mr-1"></i> Last updated</div>
-                                        <span>@Model.UpdatedAt</span>
+                                        <div><i class="icon-thumbs-up mr-1"></i> Nr of Owners</div>
+                                        <span>@Model.NrOfOwners</span>
                                     </div>
                                 </li>
                                 <li class="list-group-item">
                                     <div class="d-flex justify-content-between">
-                                        <div><i class="icon-thumbs-up mr-1"></i> Nr of Owners</div>
-                                        <span>2</span>
+                                        <div><i class="icon-edit mr-1"></i> Last updated</div>
+                                        <span>@Model.UpdatedAt</span>
                                     </div>
                                 </li>
                             </ul>
@@ -228,6 +230,10 @@
                         <article>
                             @Model.Description
                         </article>
+                        <div>
+                            <h5>Per me shume informacion kontaktoni ne numrin e meposhtem:</h5>
+                            <i class="fas fa-phone"></i> @Model.PhoneNumber
+                        </div>
                     </div>
                 </div>
             </div>
@@ -251,9 +257,9 @@
         var fullScreenDiv = document.createElement('div');
         fullScreenDiv.className = 'full-screen-image';
         fullScreenDiv.innerHTML = `
-                        <span class="close-button" onclick="closeFullScreenImage()">×</span>
-                        <img src="${imgSrc}" alt="Full Screen Image">
-                    `;
+                            <span class="close-button" onclick="closeFullScreenImage()">×</span>
+                            <img src="${imgSrc}" alt="Full Screen Image">
+                        `;
         document.body.appendChild(fullScreenDiv);
     }
 

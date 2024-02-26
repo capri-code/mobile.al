@@ -106,6 +106,20 @@
         <span asp-validation-for="Emission" class="text-danger"></span>
     </div>
     <div class="form-group">
+        <label asp-for="NrOfOwners">Owners</label>
+        <input asp-for="NrOfOwners" class="form-control" placeholder="Number of Owners">
+        <span asp-validation-for="NrOfOwners" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <ol class="row">
+            <li class="cell" style="width: 20%;">Phone Number:</li>
+            <li class="cell last" style="width: 60%;">
+                @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "textbox", placeholder = "+355 69 123 4567" })
+                @Html.ValidationMessageFor(model => model.PhoneNumber)
+            </li>
+        </ol>
+    </div>
+    <div class="form-group">
         <label asp-for="Address.Street">Street</label>
         <input asp-for="Address.Street" class="form-control" placeholder="Street">
         <span asp-validation-for="Address.Street" class="text-danger"></span>

@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Selling Website</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Add your custom CSS styles here -->
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -41,7 +40,7 @@
             border-radius: 8px;
             overflow: hidden;
             margin: 16px;
-            width: 300px;
+            width: 500px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s;
         }
@@ -75,7 +74,7 @@
         .car-price {
             font-size: 1.2rem;
             font-weight: bold;
-            color: #28a745; /* Green color for price */
+            color: #28a745;
         }
 
         a {
@@ -97,7 +96,7 @@
 <body>
 
     <header>
-        <h1>Welcome to our Car Selling Website</h1>
+        <h1>Welcome to mobile.al!</h1>
     </header>
 
     <div class="car-container">
@@ -110,67 +109,27 @@
                 }
                 else
                 {
-                    <p>No photos available</p>
+                    <p class="text-center mt-4">No photos available</p>
                 }
                 <div class="car-details">
                     <div class="car-title">@car.Make</div>
                     <div class="car-info">
-                        <p>@car.Make @car.Model</p>
-                        <p>Year: @car.FirstRegistration</p>
+                        <p>Year: @(car.FirstRegistration.HasValue ? car.FirstRegistration.Value.ToString("dd/MM/yyyy") : "N/A")</p>
                     </div>
                     <div class="car-price">@car.Price€</div>
                 </div>
 
-                @*<a type="btn btn-success" asp-controller="Car" asp-action="Detail" asp-route-id="@car.Id" class="btn btn-sm btn-outline-secondary">View details</a>*@
-                @*<a href="@Url.Action("Details", new { id = car.Id })">View Details</a>*@
-                <a asp-controller="Car" asp-action="Detail" asp-route-id="@car.Id">View details</a>
+                <a asp-controller="Car" asp-action="Detail" asp-route-id="@car.Id" class="btn btn-primary btn-block">View details</a>
                 @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
                 {
-                    <a asp-controller="Car" asp-action="Edit" asp-route-id="@car.Id">Edit</a>
-                    <a asp-controller="Car" asp-action="Delete" asp-route-id="@car.Id">Delete</a>
+                    <a asp-controller="Car" asp-action="Edit" asp-route-id="@car.Id" class="btn btn-secondary btn-block">Edit</a>
+                    <a asp-controller="Car" asp-action="Delete" asp-route-id="@car.Id" class="btn btn-danger btn-block">Delete</a>
                 }
             </div>
         }
     </div>
-
-    <!-- Add your additional HTML content, scripts, or footer here -->
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-
-@*@model IEnumerable<Car>
-
-<div class="text-center">
-    <h1 class="display-4 text-black">Today's Deals</h1>
-
-</div>
-
-<div class="d-flex flex-column" style="gap: 16px">
-    <div class="card flex-row">
-        @foreach (var item in Model)
-        {
-            <img alt="Car image"
-                 class="card-img-left example-card-img-responsive m-3"
-                 src="@item.Image"
-                 width="328"
-                 height="260"
-                 style="background-size: contain"
-                 draggable="false" />
-            <div class="card-body">
-                <h4 class="card-title h5 h4-sm"><strong>@item.Category</strong></h4>
-                <h5>Price: $100.000</h5>
-                <h6>Km: 61.000km</h6>
-                <p class="card-text">Lorem ipsum dolor sit amed</p>
-                <a type="btn btn-success" asp-controller="Car" asp-action="Detail" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">View details</a>
-                @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
-                {
-                    <a type="btn btn-success" asp-controller="Car" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
-                    <a type="btn btn-success" asp-controller="Car" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Delete</a>
-                }
-            </div>
-        }
-    </div>
-</div>*@
